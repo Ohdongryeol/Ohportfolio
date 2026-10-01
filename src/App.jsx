@@ -115,10 +115,10 @@ const PROJECTS = [
   {
     id: "kick-back-cover",
     title: "KICK BACK (Cover)",
-    role: "기획, 촬영, 편집(자막 제외)",
+    role: "기획(100%), 촬영(100%), 편집(자막 제외 100%)",
     tools: "Cannon 90D, Ronin SC, Premiere Pro",
     category: "Music Video",
-    year: "2025.02.18",
+    year: "2025.02.04 - 2025.02.18",
     embed: "https://www.youtube.com/embed/hDciTx0XL1k",
     note: "요네즈 켄시(米津玄師)의 'KICK BACK'을 커버한 뮤직비디오입니다.",
   },
