@@ -215,7 +215,7 @@ function Hero() {
   return (
     <section id="top" className="relative w-full bg-[#0a0a0a] md:h-screen md:overflow-hidden">
       {/* 쇼릴 영상: 모바일은 1페이지 전체 화면, 데스크톱은 왼쪽 60% (처음부터 자동 재생) */}
-      <div className="relative h-[100svh] w-full md:absolute md:inset-y-0 md:left-0 md:h-auto md:w-[60%]">
+      <div className="relative flex h-[100svh] w-full items-center justify-center bg-black md:absolute md:inset-y-0 md:left-0 md:block md:h-auto md:w-[60%]">
         <video
           ref={videoRef}
           src={PROFILE.reel}
@@ -225,7 +225,7 @@ function Hero() {
           muted={muted}
           playsInline
           preload="auto"
-          className="h-full w-full object-cover"
+          className="aspect-[4/3] w-full object-cover md:aspect-auto md:h-full"
         />
         {/* 데스크톱: 오른쪽 가장자리를 어둡게 페이드 → 사진 쪽 페이드와 가운데서 자연스럽게 만남 */}
         <div
