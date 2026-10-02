@@ -213,9 +213,9 @@ function Hero() {
   }, [playing]);
 
   return (
-    <section id="top" className="relative h-screen w-full overflow-hidden bg-[#0a0a0a]">
-      {/* 쇼릴 영상: 모바일은 위쪽 50%, 데스크톱은 왼쪽 60% (처음부터 자동 재생) */}
-      <div className="absolute inset-x-0 top-0 h-[50%] md:inset-y-0 md:left-0 md:right-auto md:h-auto md:w-[60%]">
+    <section id="top" className="relative w-full bg-[#0a0a0a] md:h-screen md:overflow-hidden">
+      {/* 쇼릴 영상: 모바일은 1페이지 전체 화면, 데스크톱은 왼쪽 60% (처음부터 자동 재생) */}
+      <div className="relative h-[100svh] w-full md:absolute md:inset-y-0 md:left-0 md:h-auto md:w-[60%]">
         <video
           ref={videoRef}
           src={PROFILE.reel}
@@ -235,17 +235,26 @@ function Hero() {
               "linear-gradient(to left, #0a0a0a 0%, rgba(10,10,10,0.8) 15%, rgba(10,10,10,0.35) 38%, rgba(10,10,10,0) 65%)",
           }}
         />
-        {/* 모바일: 아래쪽 가장자리를 어둡게 페이드 → 사진과 자연스럽게 이어짐 */}
-        <div
-          className="absolute inset-0 md:hidden"
-          style={{
-            background: "linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.5) 20%, rgba(10,10,10,0) 50%)",
-          }}
-        />
+        {/* 모바일 전용: 영상 위 버튼 (음소거 / Stop Reel) */}
+        <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 px-6 pb-10 md:hidden">
+          <button
+            onClick={() => setMuted((m) => !m)}
+            aria-label={muted ? "음소거 해제" : "음소거"}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/40 bg-black/30 text-base backdrop-blur-sm"
+          >
+            {muted ? "🔇" : "🔊"}
+          </button>
+          <button
+            onClick={() => setPlaying((p) => !p)}
+            className="rounded-full border border-white/40 bg-black/30 px-5 py-2.5 text-sm backdrop-blur-sm"
+          >
+            {playing ? "Stop Reel" : "Play Reel"}
+          </button>
+        </div>
       </div>
 
-      {/* 프로필 사진: 모바일은 아래쪽 50%, 데스크톱은 오른쪽 40% */}
-      <div className="absolute inset-x-0 bottom-0 h-[50%] md:inset-y-0 md:left-auto md:right-0 md:h-auto md:w-[40%]">
+      {/* 프로필 사진: 모바일은 2페이지 전체 화면, 데스크톱은 오른쪽 40% */}
+      <div className="relative h-[100svh] w-full md:absolute md:inset-y-0 md:left-auto md:right-0 md:h-auto md:w-[40%]">
         <img
           src={PROFILE.photo}
           alt={`${PROFILE.name} 프로필`}
@@ -263,7 +272,7 @@ function Hero() {
       </div>
 
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[100svh] md:inset-0 md:h-auto"
         style={{ background: "linear-gradient(to top, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0) 50%)" }}
       />
 
@@ -271,23 +280,28 @@ function Hero() {
         <div>
           <h1 className="f-display text-6xl leading-none tracking-tight md:text-9xl">{PROFILE.name}</h1>
           <p className="mt-3 text-base text-white/70 md:text-xl">{PROFILE.title}</p>
+
+          {/* 데스크톱: 음소거 / Stop Reel 버튼은 왼쪽(이름 아래)에 배치 */}
+          <div className="mt-6 hidden items-center gap-3 md:flex">
+            <button
+              onClick={() => setMuted((m) => !m)}
+              aria-label={muted ? "음소거 해제" : "음소거"}
+              title={muted ? "음소거 해제" : "음소거"}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/40 text-base backdrop-blur-sm transition-colors hover:bg-white hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              {muted ? "🔇" : "🔊"}
+            </button>
+            <button
+              onClick={() => setPlaying((p) => !p)}
+              className="rounded-full border border-white/40 px-5 py-2.5 text-sm backdrop-blur-sm transition-colors hover:bg-white hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              {playing ? "Stop Reel" : "Play Reel"}
+            </button>
+          </div>
         </div>
 
-        <nav className="flex flex-wrap items-center gap-x-6 gap-y-4">
-          <button
-            onClick={() => setMuted((m) => !m)}
-            aria-label={muted ? "음소거 해제" : "음소거"}
-            title={muted ? "음소거 해제" : "음소거"}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/40 text-base backdrop-blur-sm transition-colors hover:bg-white hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-          >
-            {muted ? "🔇" : "🔊"}
-          </button>
-          <button
-            onClick={() => setPlaying((p) => !p)}
-            className="rounded-full border border-white/40 px-5 py-2.5 text-sm backdrop-blur-sm transition-colors hover:bg-white hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-          >
-            {playing ? "Stop Reel" : "Play Reel"}
-          </button>
+        {/* Work / About 는 오른쪽에 한 줄로 */}
+        <nav className="flex flex-nowrap items-center gap-x-8">
           <a href="#work" className="text-2xl font-light transition-colors hover:text-[#D1F366] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:text-3xl">
             Work
           </a>
