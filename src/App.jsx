@@ -193,12 +193,20 @@ function Hero() {
   const [playing, setPlaying] = useState(true); // 페이지 진입 시 바로 재생
   const [muted, setMuted] = useState(true); // 자동재생 정책상 처음엔 음소거로 시작
 
+  // React의 muted 속성은 HTML에 반영이 안 될 때가 있어서 직접 지정 (모바일 자동재생에 필요)
+  useEffect(() => {
+    const v = videoRef.current;
+    if (v) v.muted = muted;
+  }, [muted]);
+
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     if (playing) {
+      v.muted = muted;
       const p = v.play();
-      if (p && p.catch) p.catch(() => {});
+      // 자동재생이 막히면 버튼이 "Play Reel"로 바뀌어서, 누르면 재생돼요
+      if (p && p.catch) p.catch(() => setPlaying(false));
     } else {
       v.pause();
     }
@@ -206,11 +214,12 @@ function Hero() {
 
   return (
     <section id="top" className="relative h-screen w-full overflow-hidden bg-[#0a0a0a]">
-      {/* 왼쪽: 쇼릴 영상 (데스크톱에서만 노출, 처음부터 자동 재생) — 전체의 60% */}
-      <div className="absolute inset-y-0 left-0 hidden w-[60%] md:block">
+      {/* 쇼릴 영상: 모바일은 위쪽 50%, 데스크톱은 왼쪽 60% (처음부터 자동 재생) */}
+      <div className="absolute inset-x-0 top-0 h-[50%] md:inset-y-0 md:left-0 md:right-auto md:h-auto md:w-[60%]">
         <video
           ref={videoRef}
           src={PROFILE.reel}
+          poster={PROFILE.photo}
           autoPlay
           loop
           muted={muted}
@@ -218,7 +227,7 @@ function Hero() {
           preload="auto"
           className="h-full w-full object-cover"
         />
-        {/* 오른쪽 가장자리를 어둡게 페이드 → 사진 쪽 페이드와 가운데서 자연스럽게 만남 */}
+        {/* 데스크톱: 오른쪽 가장자리를 어둡게 페이드 → 사진 쪽 페이드와 가운데서 자연스럽게 만남 */}
         <div
           className="absolute inset-0 hidden md:block"
           style={{
@@ -226,17 +235,24 @@ function Hero() {
               "linear-gradient(to left, #0a0a0a 0%, rgba(10,10,10,0.8) 15%, rgba(10,10,10,0.35) 38%, rgba(10,10,10,0) 65%)",
           }}
         />
+        {/* 모바일: 아래쪽 가장자리를 어둡게 페이드 → 사진과 자연스럽게 이어짐 */}
+        <div
+          className="absolute inset-0 md:hidden"
+          style={{
+            background: "linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.5) 20%, rgba(10,10,10,0) 50%)",
+          }}
+        />
       </div>
 
-      {/* 오른쪽: 프로필 사진 (항상 표시, 페이드 없음) — 전체의 40% */}
-      <div className="absolute inset-y-0 right-0 w-full md:w-[40%]">
+      {/* 프로필 사진: 모바일은 아래쪽 50%, 데스크톱은 오른쪽 40% */}
+      <div className="absolute inset-x-0 bottom-0 h-[50%] md:inset-y-0 md:left-auto md:right-0 md:h-auto md:w-[40%]">
         <img
           src={PROFILE.photo}
           alt={`${PROFILE.name} 프로필`}
           className="h-full w-full object-cover grayscale contrast-110"
           style={{ objectPosition: "50% 30%" }}
         />
-        {/* 왼쪽 가장자리를 어둡게 페이드 → 영상 쪽 페이드와 가운데서 자연스럽게 만남 */}
+        {/* 데스크톱: 왼쪽 가장자리를 어둡게 페이드 → 영상 쪽 페이드와 가운데서 자연스럽게 만남 */}
         <div
           className="absolute inset-0 hidden md:block"
           style={{
@@ -262,7 +278,7 @@ function Hero() {
             onClick={() => setMuted((m) => !m)}
             aria-label={muted ? "음소거 해제" : "음소거"}
             title={muted ? "음소거 해제" : "음소거"}
-            className="hidden h-10 w-10 items-center justify-center rounded-full border border-white/40 text-base backdrop-blur-sm transition-colors hover:bg-white hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:flex"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/40 text-base backdrop-blur-sm transition-colors hover:bg-white hover:text-[#0a0a0a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             {muted ? "🔇" : "🔊"}
           </button>
