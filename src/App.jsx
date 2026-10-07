@@ -34,6 +34,9 @@ const ABOUT = {
     { period: "3D", title: "Cinema 4D" },
     { period: "Audio", title: "Premiere Pro, Cubase" },
     { period: "AI", title: "Gemini, Claude, GPT, Google Flow, Suno" },
+    { period: "Camera", title: "Canon 70D, Canon 80D, Canon 90D, Canon Mark II, LUMIX S9, SONY ZV-E10" },
+    { period: "Gimbal", title: "Ronin SC" },
+    { period: "Audio Gear", title: "RODE NTG5, Sony PCM-D10" },
   ],
   contact: {
     email: PROFILE.email,
@@ -152,15 +155,6 @@ const PROJECTS = [
     note: "답답한 도심을 벗어나 캠핑카를 타고 자유로운 여행을 떠나는 프로그램의 오프닝 타이틀을 모션그래픽으로 제작한 영상입니다.",
   },
   {
-    id: "health",
-    title: "건강제품 광고 모션그래픽",
-    role: "1인 제작(100%)",
-    tools: "After Effects",
-    category: "Motion Graphic",
-    year: "2026.08.31 - 2026.09.14",
-    embed: "https://www.youtube.com/embed/5PMnjYddL9g",
-  },
-  {
     id: "motion-3",
     title: "대한민국 축구 국가대표팀 소개 영상", // ← 영상 제목으로 바꿔주세요
     role: "1인 제작(100%)",
@@ -168,6 +162,16 @@ const PROJECTS = [
     category: "Motion Graphic",
     year: "2026.08.03 - 2026.08.10",
     embed: "https://www.youtube.com/embed/ELRbVq3sg1c",
+  },
+  {
+    id: "torreta",
+    title: "토레타 광고 20's",
+    role: "기획(20%), 편집(100%), 조명",
+    tools: "LUMIX S9, Premiere Pro, After Effects, Google flow, Claude",
+    category: "Advertisement",
+    year: "2026.09.09 - 2026.10.02",
+    embed: "https://www.youtube.com/embed/3veK8lrnOww",
+    note: "무언가에 몰입하는 순간에도, 쉬어가는 순간에도. 일상 어디에서나 필요한 이온을 가볍게 채워주는 토레타.",
   },
 ];
 /* ───────────────────────────────────────────── */
