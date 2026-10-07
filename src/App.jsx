@@ -67,7 +67,7 @@ const PROJECTS = [
   {
     id: "torreta",
     title: "토레타 광고 20's",
-    role: "기획(20%), 편집(100%), 조명",
+    role: "기획(20%), 촬영(20%), 편집(100%), 조명",
     tools: "LUMIX S9, Premiere Pro, After Effects, Google flow, Claude",
     category: "Advertisement",
     year: "2026.09.09 - 2026.10.02",
