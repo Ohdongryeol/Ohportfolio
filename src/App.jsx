@@ -34,7 +34,7 @@ const ABOUT = {
     { period: "3D", title: "Cinema 4D" },
     { period: "Audio", title: "Premiere Pro, Cubase" },
     { period: "AI", title: "Gemini, Claude, GPT, Google Flow, Suno" },
-    { period: "Camera", title: "Canon 70D, Canon 80D, Canon 90D, Canon 5D Mark II, LUMIX S9, SONY ZV-E10" },
+    { period: "Camera", title: "Canon 70D, Canon 80D, Canon 90D, Canon 5D Mark II, LUMIX S9, SONY ZV-E10, SONY PXW-Z90" },
     { period: "Gimbal", title: "Ronin SC" },
     { period: "Audio Gear", title: "RODE NTG5, Sony PCM-D10" },
   ],
@@ -67,7 +67,7 @@ const PROJECTS = [
   {
     id: "torreta",
     title: "토레타 광고 20's",
-    role: "기획(20%), 촬영(20%), 편집(100%), 조명",
+    role: "기획(50%), 촬영(20%), 편집(100%), AI(100%), 조명",
     tools: "LUMIX S9, Premiere Pro, After Effects, Google flow, Claude",
     category: "Advertisement",
     year: "2026.09.09 - 2026.10.02",
